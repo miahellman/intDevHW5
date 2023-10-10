@@ -8,7 +8,9 @@ public class CardGameManager : MonoBehaviour
     {
         DEAL,
         CHOOSE,
-        RESOLVE
+        RESOLVE,
+        RESHUFFLE
+
     }
 
     public static GameState state;
@@ -41,12 +43,15 @@ public class CardGameManager : MonoBehaviour
                 break;
             case GameState.RESOLVE:
                 break;
+            case GameState.RESHUFFLE:
+                break;
 
         }
     }
 
     void DealCard()
     {
+        //deal player card
         GameObject nextCard = DeckManager.deck[DeckManager.deck.Count - 1];
         Vector3 newPos = playerPos.transform.position;
         newPos.x = newPos.x + (2f * playerHand.Count);
