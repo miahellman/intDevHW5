@@ -5577,7 +5577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cloudPrefab: {fileID: 226081429279929443, guid: 005aa10a9bb790e42af21648e1136d22, type: 3}
   maxClouds: 50
-  minClouds: 10
+  minClouds: 25
   timeToCloud: 3
 --- !u!61 &519575595
 BoxCollider2D:
@@ -5783,7 +5783,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 6.544716
+  orthographic size: 6.536431
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5806,8 +5806,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 786757611}
-  m_LocalRotation: {x: 0, y: 0.072200336, z: 0, w: 0.99739015}
-  m_LocalPosition: {x: -1.7904116, y: 8.3, z: -9.999999}
+  m_LocalRotation: {x: -1e-45, y: 0.072200336, z: 0, w: 0.99739015}
+  m_LocalPosition: {x: -1.7904114, y: 8.3, z: -9.999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5891,6 +5891,8 @@ MonoBehaviour:
   xAccel: 2
   gravity: -0.5
   bounceVel: 15
+  castDist: 1.5
+  otherPlayer: Player 2
   revive: {fileID: 788613936}
   jump: {fileID: 788613935}
   boop: {fileID: 788613934}
@@ -6902,7 +6904,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 953581535}
-  m_LocalRotation: {x: -1e-45, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -7109,8 +7111,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240145459}
-  m_LocalRotation: {x: -1e-45, y: -0.072200336, z: -0, w: 0.99739015}
-  m_LocalPosition: {x: -1.440238, y: 2.8e-44, z: 9.895741}
+  m_LocalRotation: {x: 1e-45, y: -0.072200336, z: -0, w: 0.99739015}
+  m_LocalPosition: {x: -1.440238, y: -2.8e-44, z: 9.895741}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7225,7 +7227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1503405558}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.16350001, y: 13.5408, z: -9.905099}
+  m_LocalPosition: {x: 8.69, y: 17.23, z: -9.905099}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7693,6 +7695,8 @@ MonoBehaviour:
   xAccel: 2
   gravity: -0.5
   bounceVel: 15
+  castDist: 1
+  otherPlayer: Player
   revive: {fileID: 1922190238}
   jump: {fileID: 1922190237}
   boop: {fileID: 1922190236}
@@ -7762,9 +7766,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1922190229}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.01, y: 8.3, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 5.0100007, y: 8.3, z: -0.000000059604645}
+  m_LocalScale: {x: 1, y: 1.0000002, z: 1.0000002}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -8250,7 +8254,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2034821276}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 11.38, y: 17.63, z: -9.905099}
+  m_LocalPosition: {x: -1.43, y: 17.79, z: -9.905099}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

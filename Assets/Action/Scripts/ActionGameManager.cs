@@ -9,7 +9,6 @@ public class ActionGameManager : MonoBehaviour
     public int maxClouds;
     public int minClouds;
 
-
     public float timeToCloud;
     float timeToCloudCounter;
 
@@ -41,6 +40,7 @@ public class ActionGameManager : MonoBehaviour
                 timeToCloudCounter = 0;
             }
         }
+
     }
 
     void MakeACloud()
@@ -59,7 +59,7 @@ public class ActionGameManager : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
         //destroys clouds when player collides 
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" /* && raycast not touching player*/)
         {
             Destroy(gameObject, 0.5f);
         }

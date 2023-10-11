@@ -11,6 +11,10 @@ public class ActionPlayer : MonoBehaviour
     public float xAccel;
     public float gravity;
     public float bounceVel;
+    public float castDist = 5f;
+
+    public string otherPlayer;
+    public RaycastHit2D hit;
 
     public AudioSource revive;
     public AudioSource jump;
@@ -77,14 +81,22 @@ public class ActionPlayer : MonoBehaviour
                 dead = false;
             }
         }
+
+       
     }
 
     private void FixedUpdate()
     {
+
         Vector3 newVel = myBody.velocity;
 
         newVel.x *= 0.9f;
         newVel.y += gravity;
+
+        hit = Physics2D.Raycast(transform.position, Vector2.up, castDist); //holds the information from a raycast hit 
+
+        Debug.DrawRay(transform.position, Vector2.down * castDist, Color.red);
+
 
         if (bounce)
         {
@@ -108,19 +120,16 @@ public class ActionPlayer : MonoBehaviour
         //update text with score - converts int to string
         string scoreStr = score.ToString();
         scoreText.text = scoreStr;
-    }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //detect cloud collision + allow player to bounce
-        if(collision.gameObject.tag == "Cloud" && myBody.velocity.y <= 0)
+        /*
+        if (hit.collider != null && hit.transform.tag == "Cloud")
         {
-            destroyCloud = collision.gameObject;
+            destroyCloud = hit.collider.gameObject;
             bounce = true;
             boop.Play(1);
         }
 
-        if (collision.gameObject.tag == "Player")
+        if (hit.collider != null && hit.transform.name == otherPlayer)
         {
             //bounce off player and add to score
             bounce = true;
@@ -134,9 +143,45 @@ public class ActionPlayer : MonoBehaviour
             //plays particle effect
             emitter.enabled = true;
             clashParticle.Play();
+
+        }
+        */
+
+    }
+    
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+
+        //spawn particles when collide with player
+        var emitter = clashParticle.emission;
+        var pDuration = clashParticle.duration;
+
+        //detect cloud collision + allow player to bounce
+        if (collision.gameObject.tag == "Cloud")
+        {
+            destroyCloud = collision.gameObject;
+            bounce = true;
+            boop.Play(1);
+        }
+
+        if (collision.gameObject.tag == "Player")
+        {
+            //bounce off player and add to score
+            bounce = true;
+            score++;
+            boop.Play(1);
+
+        
+            //plays particle effect
+            emitter.enabled = true;
+            clashParticle.Play();
             
         }
-    }
+        else //disable particle if not colliding
+        {
+            emitter.enabled = false;
+        }
+    } 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
