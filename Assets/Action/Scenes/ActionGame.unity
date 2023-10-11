@@ -5891,7 +5891,7 @@ MonoBehaviour:
   xAccel: 2
   gravity: -0.5
   bounceVel: 15
-  castDist: 1.5
+  castDist: 3
   otherPlayer: Player 2
   revive: {fileID: 788613936}
   jump: {fileID: 788613935}

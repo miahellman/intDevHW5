@@ -17,7 +17,7 @@ public class ActionGameManager : MonoBehaviour
     Vector3 minBounds;
     Vector3 maxBounds;
 
-    List<GameObject> allClouds = new List<GameObject>();
+    public List<GameObject> allClouds = new List<GameObject>();
 
     private void Start()
     {
@@ -40,6 +40,7 @@ public class ActionGameManager : MonoBehaviour
                 timeToCloudCounter = 0;
             }
         }
+        allClouds.RemoveAll(delegate(GameObject o) { return o == null; }); //why doesn't this work
 
     }
 
@@ -61,7 +62,9 @@ public class ActionGameManager : MonoBehaviour
         //destroys clouds when player collides 
         if (collision.gameObject.tag == "Player" /* && raycast not touching player*/)
         {
-            Destroy(gameObject, 0.5f);
+            Debug.Log("destroyed: " + transform.parent.gameObject);
+            Destroy(transform.parent.gameObject, 5f); //shouldnt this delete parent??
+            
         }
     }
 
