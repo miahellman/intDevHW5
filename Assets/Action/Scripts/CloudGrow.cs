@@ -30,4 +30,12 @@ public class CloudGrow : MonoBehaviour
         timesGrown++;
         cloudSizes[timesGrown].SetActive(true);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(gameObject, 0.5f);
+        }
+    }
 }

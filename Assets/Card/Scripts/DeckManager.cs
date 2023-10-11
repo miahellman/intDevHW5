@@ -21,7 +21,9 @@ public class DeckManager : MonoBehaviour
             Card newCardScript = newCard.GetComponent<Card>(); //create new card
             newCardScript.faceSprite = cardFaces[i % 3]; //takes remainder to decide what type of card it is
             deck.Add(newCard); //adds card to deck
+
         }
+
     }
 
 }

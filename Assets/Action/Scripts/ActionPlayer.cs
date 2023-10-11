@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class ActionPlayer : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class ActionPlayer : MonoBehaviour
     public float xAccel;
     public float gravity;
     public float bounceVel;
+
+    [SerializeField] int score;
+    [SerializeField] TextMeshProUGUI scoreText;
 
     bool goLeft;
     bool goRight;
@@ -73,6 +77,14 @@ public class ActionPlayer : MonoBehaviour
         if(collision.gameObject.tag == "Cloud")
         {
             bounce = true;
+        }
+
+        if (collision.gameObject.tag == "Player")
+        {
+            score++;
+            string scoreStr = score.ToString();
+            scoreText.text = scoreStr;
+               
         }
     }
 

@@ -9,6 +9,7 @@ public class ActionGameManager : MonoBehaviour
     public int maxClouds;
     public int minClouds;
 
+
     public float timeToCloud;
     float timeToCloudCounter;
 
@@ -50,6 +51,14 @@ public class ActionGameManager : MonoBehaviour
             );
         newCloud.transform.position = newPos;
         allClouds.Add(newCloud);
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            Destroy(gameObject, 0.5f);
+        }
     }
 
 }
