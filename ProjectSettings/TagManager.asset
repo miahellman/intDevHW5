@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Cloud
   - Floor
+  - Right Bound
+  - Left Bound
   layers:
   - Default
   - TransparentFX

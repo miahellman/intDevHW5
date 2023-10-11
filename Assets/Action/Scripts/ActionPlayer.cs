@@ -22,6 +22,8 @@ public class ActionPlayer : MonoBehaviour
 
     public GameObject destroyCloud;
     public GameObject respawnLoc;
+    public GameObject leftSpawn;
+    public GameObject rightSpawn;
 
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] ParticleSystem clashParticle;
@@ -145,6 +147,17 @@ public class ActionPlayer : MonoBehaviour
             dead = true;
 
         }
+
+        if (collision.gameObject.tag == "Left Bound") //if you go to the side you spawn on other end of screen
+        {
+            transform.position = rightSpawn.transform.position;
+
+        } else if (collision.gameObject.tag == "Right Bound")
+        {
+            transform.position = leftSpawn.transform.position;
+        }
+
+
     }
 
 }
