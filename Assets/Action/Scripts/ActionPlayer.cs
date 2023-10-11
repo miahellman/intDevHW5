@@ -12,8 +12,21 @@ public class ActionPlayer : MonoBehaviour
     public float gravity;
     public float bounceVel;
 
-    [SerializeField] int score;
+    public AudioSource revive;
+    public AudioSource jump;
+    public AudioSource boop;
+    public AudioSource die;
+
+    float timeToRespawn = 3f;
+    float timeToRespawnCounter;
+
+    public GameObject destroyCloud;
+    public GameObject respawnLoc;
+
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] ParticleSystem clashParticle;
+
+    private int score;
 
     bool goLeft;
     bool goRight;
@@ -21,6 +34,7 @@ public class ActionPlayer : MonoBehaviour
     Rigidbody2D myBody;
 
     bool bounce = true;
+    bool dead = false;
 
     private void Start()
     {
@@ -29,6 +43,7 @@ public class ActionPlayer : MonoBehaviour
 
     private void Update()
     {
+        //movement
         if (Input.GetKey(leftKey))
         {
             goLeft = true;
@@ -46,6 +61,20 @@ public class ActionPlayer : MonoBehaviour
         {
             goRight = false;
         }
+
+        if (dead)
+        {
+            //respawn delay
+            timeToRespawnCounter += Time.deltaTime * 5;
+            if (timeToRespawnCounter >= timeToRespawn)
+            {
+                //play revive sound
+                revive.Play(1);
+                //spawn player back in the map
+                this.transform.position = respawnLoc.transform.position;
+                dead = false;
+            }
+        }
     }
 
     private void FixedUpdate()
@@ -58,7 +87,10 @@ public class ActionPlayer : MonoBehaviour
         if (bounce)
         {
             newVel.y += bounceVel;
+            //jump audio
+            jump.Play(1);
             bounce = false;
+            Destroy(destroyCloud);
         }
 
         if (goLeft)
@@ -69,22 +101,49 @@ public class ActionPlayer : MonoBehaviour
             newVel.x += xAccel;
         }
 
-        myBody.velocity = newVel;
+        myBody.velocity = newVel; 
+
+        //update text with score - converts int to string
+        string scoreStr = score.ToString();
+        scoreText.text = scoreStr;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Cloud")
+        //detect cloud collision + allow player to bounce
+        if(collision.gameObject.tag == "Cloud" && myBody.velocity.y <= 0)
         {
+            destroyCloud = collision.gameObject;
             bounce = true;
+            boop.Play(1);
         }
 
         if (collision.gameObject.tag == "Player")
         {
+            //bounce off player and add to score
+            bounce = true;
             score++;
-            string scoreStr = score.ToString();
-            scoreText.text = scoreStr;
-               
+            boop.Play(1);
+
+            //spawn particles when collide with player
+            var emitter = clashParticle.emission;
+            var pDuration = clashParticle.duration;
+
+            //plays particle effect
+            emitter.enabled = true;
+            clashParticle.Play();
+            
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Floor") //if fall down u die
+        {
+            score--;
+            die.Play(1);
+            dead = true;
+
         }
     }
 
